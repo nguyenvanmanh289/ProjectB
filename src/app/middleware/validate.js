@@ -4,7 +4,7 @@ import { validateAsync } from "@/utils/helpers/validate.helper";
 export function validate(schema) {
     return async function (req, res, next) {
         const field = req.method === "GET" ? "query" : "body";
-        console.log(req.body); 
+        console.log(req[field]); 
         const [value, error] = await validateAsync(schema, req[field], req);
         
         if (Object.keys(error).length > 0) {
@@ -12,6 +12,7 @@ export function validate(schema) {
         }
 
         req[field] = value;
+        // console.log(req);
         return next();
     };
 }

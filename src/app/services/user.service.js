@@ -12,7 +12,6 @@ export const createUser = async (req) => {
         }
         const payload = req.body;
 
-        console.log(payload.password, "=========");
         const user = new User({
             name: payload.name || uniqid.time("user-"),
             password: generatePassword(payload.password),
@@ -52,6 +51,14 @@ export const updateUser = async (req) => {
 }
 
 export const removeUser = async (id)=>{
-
+    const user = await User.findById(id);
+    FileUpload.remove(user.avatarUrl);
+    return await User.deleteOne({_id: id})
 }
 
+//login/out
+
+export const loginUser = async (payload)=>{
+    const user = await User.findOne({email : payload.email});
+    return user;
+}

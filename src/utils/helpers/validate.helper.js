@@ -6,6 +6,7 @@ import { AsyncValidate } from "../handlers/AsyncValidate";
 export async function validateAsync(schema, data, ...args) {
     let errorDetails = {};
 
+    console.log(data,"=====================================")
     async function dfs(variable) {
         if (variable instanceof AsyncValidate) {
             variable = await variable.exec(...args);
@@ -41,7 +42,6 @@ export async function validateAsync(schema, data, ...args) {
 
         errorDetails = error;
     }
-
     value = await dfs(value);
 
     return [value, errorDetails];

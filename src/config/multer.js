@@ -14,13 +14,13 @@ export const uploadFile = (req,res,next) => {
         }
 
         if(req.files.length > 0){
-                const file = new FileUpload(
+            const file = new FileUpload(
                 req.files[0].originalname,
                 req.files[0].buffer
             );
             req.files = file;
-            
         }
-        next()
+        next();
     });
+    
 }
