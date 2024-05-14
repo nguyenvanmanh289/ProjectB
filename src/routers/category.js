@@ -11,14 +11,12 @@ const router = Router();
 
 router.get(
     '/filter',
-    verifyTokenAll("all"),
     validate(joirequest.filter),
     filter
 )
 
 router.post(
     '/detail',
-    verifyTokenAll("all"),
     validate(joirequest.detail),
     detail
 )

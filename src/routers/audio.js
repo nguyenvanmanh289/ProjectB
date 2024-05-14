@@ -10,14 +10,12 @@ const router = Router();
 
 router.get(
     '/filter',
-    verifyTokenAll("all"),
     validate(filterAudio),
     filter
 )
 
 router.get(
     '/detail',
-    verifyTokenAll("all"),
     validate(detailAudio),
     detail
 )
