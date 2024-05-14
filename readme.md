@@ -9,13 +9,14 @@ a server backend created by nodejs express with resful Api
 
 ## Usage
 
-1. Clone project
-2. Create `.env` file, copy content from [.env.example](./.env.example) to `.env` file and config in `.env`:
+1. Clone project open folder with vscode or other code editor different
+2. Create `.env` file in root folder, copy content from `.env.example` file  to `.env` file and config in `.env`:
 
+#config env file
 -   Config Runtime Environment
 
 ```bash
-# development or production
+# development or production in .env file
 HOST=localhost
 PORT=4000
 ```
@@ -23,91 +24,63 @@ PORT=4000
 -   Config Project
 
 ```bash
-APP_NAME=ExpressJS
-APP_DEBUG=true
 # server domain name
-APP_URL_API=http://localhost:3456
+PORT=4000
+HOST=localhost
 # primary client domain name
 APP_URL_CLIENT=http://localhost:3000
-# other client domain name
-# Eg: ["http://localhost:3001", "http://localhost:3002"]
-OTHER_URLS_CLIENT=
+
 # primary secret key
-SECRET_KEY=
-# expressed in seconds or a string describing a time span
-# Eg: 60, 2 days, 10h, 7d
-JWT_EXPIRES_IN=7d
+SECRET_KEY_ADMIN = MANH@
+SECRET_KEY_USER = MANH@1
+
+# TOKEN time limit Eg: 60, 10h, 7d
+TOKEN_EXP = "7d"
 # maximum number of requests per minute
-REQUESTS_LIMIT_PER_MINUTE=100
+LIMITREQUEST = 100
 ```
 
 -   Config MongoDb Database
 
 ```bash
-DB_HOST=localhost
-DB_PORT=27017
-DB_USERNAME=
-DB_PASSWORD=
-DB_NAME=
+# typing your string connected to MongoDB driver
+MONGODB_URI = "mongodb+srv://vm28dev:<password>@database.d6k7iot.mongodb.net/?retryWrites=true&w=majority&appName=DATABASE"
+
+#typing your database password 
+MONGODB_PASS = "password"
 ```
 
--   Config Email
-
-```bash
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USERNAME=
-MAIL_PASSWORD=
-MAIL_FROM_ADDRESS=no-reply@zent.vn
-MAIL_FROM_NAME=
+- Config Email folow me
+   or typing your email
+```bash 
+    MAIL_SERVICE = "vm28.dev@gmail.com"  
+    MAIL_PASSWORD = 
 ```
 
-3. Install package & setup
+3. Install package & setup typing in command line in root folder:
+ 
+    `npm install`
 
-```bash
-npm install
-```
 
 4. Initialize data (Required for new database)
 
-```bash
-npm run seed
-```
 
 > Note: By default we will use [this account](#default-account) as the **Super Admin**.
 > If you want to change it, please set two environment variables **SUPER_ADMIN_EMAIL** and **SUPER_ADMIN_PASSWORD**.
 >
-> -   Win32 (Windows)
+> -   in .env file setup
 >     ```bash
->     set SUPER_ADMIN_EMAIL=admin@zent.vn
->     set SUPER_ADMIN_PASSWORD=Zent@123.edu.vn
->     npm run seed
->     ```
-> -   Posix (Linux, macOS)
->     ```bash
->     export SUPER_ADMIN_EMAIL=admin@zent.vn
->     export SUPER_ADMIN_PASSWORD=Zent@123.edu.vn
->     npm run seed
->     ```
-> -   Or add these two variables to the `.env` file
+>     MAIL_SERVICE = "vm28.dev@gmail.com"
+>     ADMIN_USERNAME = "admin28"
+>     ADMIN_PASSWORD = "admin28"
+>    -
+typing in command line in root folder
+`npm run seed` 
 
-5. Runs the app
 
-```bash
-npm run start
-```
+5. Runs the app in command line in root folder
 
-6. Builds the app for production to the `build` folder
-
-```bash
-npm run build
-```
-
-7. Runs the app on `production` mode
-
-```bash
-node build/main.js
-```
+      `npm run start`
 
 
 ##### Default account

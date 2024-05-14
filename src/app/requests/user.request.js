@@ -15,7 +15,8 @@ export const userCreate = Joi.object({
         })
     ),    
     password : Joi.string().min(8).max(50).required().label("mật khẩu"),
-    bio : Joi.string().max(500).label("mô tả user")
+    bio : Joi.string().max(500).label("mô tả user"),
+    avatar : Joi.object().label("file avatar của user")
 });
 
 export const userUpdate = Joi.object({
@@ -37,7 +38,8 @@ export const userUpdate = Joi.object({
 
         })
     ), 
-    bio : Joi.string().max(500).label("mô tả user")
+    bio : Joi.string().max(500).label("mô tả user"),
+    avatar : Joi.object().label("file avatar của user")
 });
 
 export const userRemove = Joi.object({

@@ -1,8 +1,8 @@
-import { create, login, remove ,logout} from "../app/controller/admin.controller";
+import { create, login, remove ,logout,detail} from "../app/controller/admin.controller";
 import { Router } from "express";
 import { validate } from "@/app/middleware/validate";
 import { adminCreate, adminLogin } from "@/app/requests/admin.request";
-import { verifyToken } from "@/app/middleware/auth.token";
+import { verifyTokenAll } from "@/app/middleware/verifyToken";
 
 const router = Router();
 
@@ -18,15 +18,21 @@ router.post(
     create,
 );
 
+router.get(
+    '/',
+    verifyTokenAll("admin"),
+    detail
+)
+
 router.delete(
     '/delete',
-    verifyToken,
+    verifyTokenAll("admin"),
      remove
 );
 
 router.post(
     '/logout',
-    verifyToken,
+    verifyTokenAll("admin"),
     logout
 );
 

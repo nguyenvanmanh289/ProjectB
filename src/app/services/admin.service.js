@@ -18,5 +18,10 @@ export const login = async (payload)=>{
 }
 
 export const remove = async (payload)=>{
+    const admin = await Admin.findOne(payload);
+    await Audio.updateMany(
+        {_id : { $in : admin.uploadedAudio }},
+        {authorId : ""}
+    )
     return await Admin.deleteOne(payload);
 }

@@ -5,8 +5,8 @@ import user from './user';
 
 const route = (app) => {
     app.use("/admin",admin);
-    // app.use("/audio",audio);
-    // app.use("/category",category);
+    app.use("/sound",audio);
+    app.use("/categories",category);
     app.use("/user",user);
 };
 

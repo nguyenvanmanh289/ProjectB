@@ -3,11 +3,11 @@ import { loginUser,createUser,detail as details ,updateUser ,removeUser} from ".
 import { genToken } from "@/utils/helpers/generateToken.helpers";
 import { comparePassword } from "@/utils/handlers/hashPassword";
 import cache from "@/storage/cache/cache";
+import { SECRET_KEY_USER } from "@/config";
 
 export const create = async (req,res,next)=>{
     try {
         const user = await createUser(req)
-        console.log(user,"=======")
         await responseSuccess(res, user);
     } catch (error) {
         next(error);
@@ -17,7 +17,7 @@ export const create = async (req,res,next)=>{
 
 export const detail = async (req,res,next)=>{
     try {
-        const user = await details(req.query.id);
+        const user = await details(req.curentUser);
         await responseSuccess(res, user);
     } catch (error) {
         next(error);
@@ -36,7 +36,8 @@ export const update = async (req,res,next)=>{
 
 export const remove = async (req,res,next)=>{
     try {
-        const user = await removeUser(req.body.id);
+        const curentUser = req.curentUser;
+        const user = await removeUser(curentUser);
         if(user){
             await responseSuccess(res, user);
         }
@@ -56,7 +57,7 @@ export const login = async (req,res,next)=>{
                 name : user.name,
                 email : user.email,
                 password : user.password,
-                token :genToken(req.body)
+                token :genToken(req.body,SECRET_KEY_USER)
             });
         }
         else{

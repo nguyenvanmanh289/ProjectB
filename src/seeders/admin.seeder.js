@@ -1,6 +1,6 @@
 import {Admin} from "../app/model/admin.model";
 import { ADMIN_USERNAME,ADMIN_PASSWORD ,MAIL_SERVICE} from "../config/constant";
-import { generatePassword } from "@/utils/handlers/HashPassword";
+import { generatePassword } from "@/utils/handlers/hashPassword";
 export const initAdmin = async () => {   
     try {
         if(!ADMIN_USERNAME && !ADMIN_PASSWORD){

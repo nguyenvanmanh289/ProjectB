@@ -11,12 +11,19 @@ export const PORT = process.env.PORT;
 export const HOST = process.env.HOST;
 export const APP_URL_API = `http://${HOST}:${PORT}/`
 
+//URL
+export const APP_URL_CLIENT = process.env.APP_URL_CLIENT
+
+//API
+export const LIMIT = process.env.LIMITREQUEST
+
 //DEFAULT ACC 
 export const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 //KEY
-export const SECRET_KEY = process.env.SECRET_KEY;
+export const SECRET_KEY_ADMIN = process.env.SECRET_KEY_ADMIN;
+export const SECRET_KEY_USER = process.env.SECRET_KEY_USER;
 export const KEY_GENERATOR = process.env.KEY_GENERATOR;
 
 export const MAIL_SERVICE = process.env.MAIL_SERVICE;

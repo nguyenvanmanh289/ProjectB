@@ -3,8 +3,10 @@ import { Schema } from "mongoose";
 const schema = new Schema({
     name : String,
     description : String,
-    thumnails : String,
+    authorId : String,
+    thumnailUrl : String,
     sourceUrl : String,
+    categories : Array
 })
 
 const Audio = createModel("Audio", schema);  

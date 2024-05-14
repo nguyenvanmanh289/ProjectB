@@ -3,13 +3,13 @@ import { create,detail,update,remove,login,logout } from "@/app/controller/user.
 import { uploadFile } from "@/config/multer";
 import { validate } from "@/app/middleware/validate";
 import { userCreate,userUpdate,userRemove,userLogin } from "@/app/requests/user.request";
-import { verifyToken } from "@/app/middleware/auth.token.user";
+import { verifyTokenAll } from "@/app/middleware/verifyToken";
 
 const router = Router();
 
 router.get(
     '/infor',
-    verifyToken,
+    verifyTokenAll("all"),
     validate(userRemove),
      detail
 );
@@ -24,7 +24,7 @@ router.post(
 
 router.put(
     '/update',
-    verifyToken,
+    verifyTokenAll("user"),
     uploadFile,
     validate(userUpdate),
     update
@@ -32,8 +32,7 @@ router.put(
 
 router.delete(
     '/delete',
-    verifyToken,
-    validate(userRemove),
+    verifyTokenAll("user"),
     remove
 )
 
@@ -45,7 +44,7 @@ router.post(
 
 router.post(
     '/logout',
-    verifyToken,
+    verifyTokenAll("user"),
     logout
 )
 

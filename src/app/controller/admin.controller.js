@@ -3,6 +3,8 @@ import { create as createAdmin, login as loginAdmin,remove as removeAdmin } from
 import { genToken } from "@/utils/helpers/generateToken.helpers";
 import { comparePassword} from "@/utils/handlers/hashPassword";
 import cache from "@/storage/cache/cache";
+import { SECRET_KEY_ADMIN } from "@/config";
+import { Admin } from "../model/admin.model";
 
 
 export const create = async (req, res, next) =>{
@@ -28,7 +30,7 @@ export const login = async (req, res,next) =>{
             responseSuccess(res, {
                 email : admin.email,
                 password : admin.password,
-                token :genToken(req.body)
+                token :genToken(req.body,SECRET_KEY_ADMIN)
             });
         }
         else{
@@ -53,10 +55,15 @@ export const remove = async(req,res)=>{
     }   
 }
 
+
+export const detail = async (req,res,next)=>{
+    const {email} = req.curentAdmin;
+    const admin = await Admin.findOne({email : email});
+    if(!admin) return responseError(res,null,400,"không tìm thấy admin");
+    return responseSuccess(res,admin);
+}
 export const logout = async (req,res)=>{
     const token = req.headers['authorization'].replace(/Bearer/, '').trim();
-   
-
     const exp = req.curentAdmin.exp;
     const ttl = exp-Math.floor(Date.now() / 1000);
     cache.addCache(token,token,ttl);

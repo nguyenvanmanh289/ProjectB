@@ -10,9 +10,7 @@ export function validate(schema) {
         if (Object.keys(error).length > 0) {
             return responseError(res, error ,400, "Validation Error");
         }
-
         req[field] = value;
-        // console.log(req);
         return next();
     };
 }

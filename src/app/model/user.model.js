@@ -8,8 +8,8 @@ const schema = new Schema({
     avatarUrl : String,
     bio : String,
     likedAudio : Array,
-    uploadedAudioUrl : Array,
-    downloadedAudioUrl : Array
+    uploadedAudio : Array,
+    downloadedAudio : Array
 })
 
 export const User = createModel("User", schema);

@@ -6,7 +6,6 @@ import { AsyncValidate } from "../handlers/AsyncValidate";
 export async function validateAsync(schema, data, ...args) {
     let errorDetails = {};
 
-    console.log(data,"=====================================")
     async function dfs(variable) {
         if (variable instanceof AsyncValidate) {
             variable = await variable.exec(...args);
@@ -23,14 +22,12 @@ export async function validateAsync(schema, data, ...args) {
 
         return variable;
     }
-
     let {value, error} = schema.messages(JOI_DEFAULT_MESSAGE).validate(data, {
         ...JOI_DEFAULT_OPTIONS,
         context: {
             data: cloneDeep(data),
         },
     });
-
     if (error) {
         error = error.details.reduce(function (pre, curr) {
             const path = curr.path.join(".");
@@ -47,9 +44,9 @@ export async function validateAsync(schema, data, ...args) {
     return [value, errorDetails];
 }
 
-export function tryValidateOrDefault(...args) {
+export const tryValidateOrDefault = (...args)=>{
     const defaultValue = args.pop();
     return Joi.alternatives()
-        .try(...args, Joi.any().empty(Joi.any()))
-        .default(defaultValue);
+        .try(...args,Joi.any().empty(Joi.any()))
+        .default(defaultValue)
 }
